@@ -192,45 +192,50 @@ public class Tetris extends JPanel
             
             public void keyPressed(KeyEvent e) 
             {
-                switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                    rotate(1);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    rotate(-1);
-                    break;
-                case KeyEvent.VK_LEFT:
-                    move(-1);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    move(+1);
-                    break;
-                case KeyEvent.VK_SPACE:
-                    dropDown();
-                    break;
-                case KeyEvent.VK_ENTER:
-                    changeRunning();
-                    break;
-                case KeyEvent.VK_0:
-                case KeyEvent.VK_NUMPAD0:
-                    dropBottom();
-                    break;
-                case KeyEvent.VK_2:
-                case KeyEvent.VK_NUMPAD2:
-                    changeLevel(-1, false);
-                    break;
-                case KeyEvent.VK_1:
-                case KeyEvent.VK_NUMPAD1:
-                    changeLevel(1, false);
-                    break;
-                case KeyEvent.VK_7:
-                case KeyEvent.VK_NUMPAD7:
-                    if(!firstStart)
-                        init();
-                    break;
-                case KeyEvent.VK_ESCAPE:
-                    System.exit(0);
-                    break;
+                switch (e.getKeyCode()) 
+                {
+                    case KeyEvent.VK_UP:        // clockwise rotation   
+                        rotate(1);
+                        break;
+                    case KeyEvent.VK_DOWN:      // anticlockwise rotation
+                        rotate(-1);
+                        break;
+                    case KeyEvent.VK_LEFT:      // move left
+                        move(-1);
+                        break;
+                    case KeyEvent.VK_RIGHT:     // move right
+                        move(+1);
+                        break;
+                    case KeyEvent.VK_SPACE:     // drop down
+                        dropDown();
+                        break;
+                    case KeyEvent.VK_ENTER:     // pause/continue/restart
+                        changeRunning();
+                        break;
+                    case KeyEvent.VK_0:         // immediately fall to the bottom
+                    case KeyEvent.VK_NUMPAD0:
+                        dropBottom();
+                        break;
+                    case KeyEvent.VK_2:         // level down
+                    case KeyEvent.VK_NUMPAD2:
+                        changeLevel(-1, false);
+                        break;
+                    case KeyEvent.VK_1:         // level up
+                    case KeyEvent.VK_NUMPAD1:
+                        changeLevel(1, false);
+                        break;
+                    case KeyEvent.VK_7:         // restart
+                    case KeyEvent.VK_NUMPAD7:
+                        if(!firstStart)
+                        {
+                            init();
+                            offsetPoint.y -= 1;
+                        }
+                            
+                        break;
+                    case KeyEvent.VK_ESCAPE:    // exit
+                        System.exit(0);
+                        break;
                 } 
             }
             
@@ -282,7 +287,7 @@ public class Tetris extends JPanel
         drawInfo(g);   
             
         if(this.gameover)     
-            drawgameover(g);
+            drawGameOver(g);
         else if(this.pause)
             drawPause(g);
     }
@@ -572,7 +577,7 @@ public class Tetris extends JPanel
     }
     
     // It is a pity that the this is over, the end message is displayed and the final score is output
-    private void drawgameover(Graphics g)
+    private void drawGameOver(Graphics g)
     {
         int offsetX = 1;
         int offsetY = Cons.ROW / 2 - Cons.ROW / 4;
