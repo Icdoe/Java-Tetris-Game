@@ -211,15 +211,19 @@ public class Tetris extends JPanel
                 case KeyEvent.VK_ENTER:
                     changeRunning();
                     break;
+                case KeyEvent.VK_0:
                 case KeyEvent.VK_NUMPAD0:
                     dropBottom();
                     break;
+                case KeyEvent.VK_2:
                 case KeyEvent.VK_NUMPAD2:
                     changeLevel(-1, false);
                     break;
+                case KeyEvent.VK_1:
                 case KeyEvent.VK_NUMPAD1:
                     changeLevel(1, false);
                     break;
+                case KeyEvent.VK_7:
                 case KeyEvent.VK_NUMPAD7:
                     if(!firstStart)
                         init();
